@@ -1,6 +1,7 @@
 package funny
 
 import (
+	"fmt"
 	"testing"
 	"time"
 )
@@ -28,7 +29,6 @@ func TestTimeout(t *testing.T) {
 			}
 		}()
 	}
-
 	time.Sleep(time.Second*10)
 
 }
@@ -48,3 +48,32 @@ func TestNoSource(t *testing.T) {
 
 }
 
+type ssss struct {
+	Fg string
+}
+
+func TestNoSource2(t *testing.T) {
+	s:=fg()
+
+	fmt.Printf("%p\n%p\n",&s,&s)
+
+
+}
+
+func fg()chan ssss  {
+	var ty chan ssss
+	ty = make(chan ssss)
+
+	go func() {
+		close(ty)
+
+		close(ty)
+		fmt.Printf("sdsdsdsdddsdd")
+	}()
+	time.Sleep(time.Second)
+	gh := make(chan ssss,1)
+	hj := gh
+	hj2 := gh
+	fmt.Printf("%p\n%p\n%p\n%p\n",&gh,&hj,&ty,&hj2)
+	return gh
+}
